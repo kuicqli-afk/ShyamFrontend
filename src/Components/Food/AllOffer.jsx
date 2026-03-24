@@ -5,7 +5,7 @@ import "./AllOffer.css";
 import img1 from "../../assets/shyam.png";
 import img2 from "../../assets/Shyam1.png";
 import img3 from "../../assets/Shyam2.png";
-import img4 from "../../assets/Shyam3.png";
+import img4 from "../../assets/Shyam3.png"
 import img5 from "../../assets/alloffer4.png";
 import img6 from "../../assets/Shyam4.png";
 
