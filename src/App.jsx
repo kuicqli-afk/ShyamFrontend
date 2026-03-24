@@ -36,7 +36,7 @@ import Special from './Components/Food/Special.jsx';
 import AdsSlider from './Components/Slider/AdsSlider.jsx';
 import OfferDetails from './Components/Pages/OfferDetails.jsx';
 import Namkeen from './Components/Food/Namkeen.jsx';
-import ShyamBakery from './Components/ShopsDetailPage/ShyamBakery.jsx';s
+import ShyamBakery from './Components/ShopsDetailPage/ShyamBakery.jsx';
 import ShaymChips from './Components/ShopsDetailPage/ShaymChips.jsx';
 import AllShopsSlider from './Components/ShopAllSlider/AllShopsSlider.jsx';
 import ShyamSev from './Components/ShopsDetailPage/ShyamSev.jsx';
