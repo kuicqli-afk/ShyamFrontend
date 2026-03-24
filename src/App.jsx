@@ -31,7 +31,7 @@ import { ScrollToTopButton } from './Components/ScrollToTopButton/ScrollToTopBut
 import ScrollToTop from "./Components/ScrollToTopButton/ScrollToTop";
 import Pastry from './Components/Food/Pastry.jsx';
 import Sev from './Components/Food/ShyamSev.jsx';
-import AllOffer from './Components/Food/AllOffer.jsx';
+import AllOffer from './Components/Food/AllOffer.jsx'
 import Special from './Components/Food/Special.jsx';
 import AdsSlider from './Components/Slider/AdsSlider.jsx';
 import OfferDetails from './Components/Pages/OfferDetails.jsx';
