@@ -2,7 +2,7 @@
 import React from "react";
 import "./AllOffer.css";
 
-import img1 from "../../assets/Shyam.png";
+import img1 from "../../assets/shyam.png";
 import img2 from "../../assets/Shyam1.png";
 import img3 from "../../assets/Shyam2.png";
 import img4 from "../../assets/Shyam3.png"
