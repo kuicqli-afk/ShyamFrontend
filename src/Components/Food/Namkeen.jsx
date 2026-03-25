@@ -38,7 +38,7 @@ function Namkeen({ categoryId, filter, sortBy, price, cuisine }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/products/category/${categoryId}`)
+    axios.get(`http://localhost:5000/api/products`)
       .then((res) => {
         let data = res.data.products;
         console.log("MaidaItems Data:", res.data);

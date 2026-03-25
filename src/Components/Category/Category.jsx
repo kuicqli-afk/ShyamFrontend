@@ -38,6 +38,8 @@ const Category = ({ onSelectCategory }) => {
   }, []);
 
   const handleCategoryClick = (id) => {
+    console.log("Clicked Category:", id); // ✅ DEBUG
+
     onSelectCategory(id);
 
     if (element) {
@@ -47,6 +49,8 @@ const Category = ({ onSelectCategory }) => {
       });
     }
   };
+
+
 
   return (
     <div className="explore-menu">
@@ -125,7 +129,7 @@ const Category = ({ onSelectCategory }) => {
             <SwiperSlide key={item._id}>
               <div
                 className="explore-menu-list-item"
-                onClick={() => onSelectCategory(item._id)} // ✅ FIXED
+                onClick={() => handleCategoryClick(item._id)}
               >
                 <img
                   src={`http://localhost:5000/uploads/${item.image}`}

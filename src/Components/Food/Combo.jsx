@@ -35,7 +35,7 @@ const Combo = ({ categoryId, filter, sortBy, price, cuisine }) => {
     if (!categoryId) return;
 
     axios
-      .get(`http://localhost:5000/api/products/category/${categoryId}`)
+            .get(`http://localhost:5000/api/products/category-products/${categoryId}`)
       .then((res) => {
         setList(res.data.products || []);
       })

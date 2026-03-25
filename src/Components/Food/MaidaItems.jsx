@@ -27,7 +27,7 @@ import { VscEye } from "react-icons/vsc";
 import { LiaStopwatchSolid } from "react-icons/lia";
 
 
-const MaidaItems = ({ categoryId, filter, sortBy, price, cuisine }) => {
+const MaidaItems = ({ selectedCategory, filter, sortBy, price, cuisine, category }) => {
     const navigate = useNavigate();
     const swiperRef = useRef(null);
 
@@ -40,25 +40,17 @@ const MaidaItems = ({ categoryId, filter, sortBy, price, cuisine }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (!category) return;
+
         axios
-            .get("http://localhost:5000/api/products")
+            .get(`http://localhost:5000/api/products/category-products/${category}`)
             .then((res) => {
-                console.log("MaidaItems Data:", res.data);
-                console.log("Selected Category:", categoryId);
-
-                let data = res.data.products;
-
-                // ✅ FILTER BY CATEGORY
-                if (categoryId) {
-                    data = data.filter(
-                        (item) => item.category === categoryId
-                    );
-                }
-
-                setList(data); // ✅ FIXED
+                console.log("Category Data:", res.data);
+                setList(res.data.products);
             })
             .catch((err) => console.log(err));
-    }, [categoryId]);
+    }, [category]);
+
 
     const filteredList = useMemo(() => {
         let result = [...list];
@@ -139,7 +131,7 @@ const MaidaItems = ({ categoryId, filter, sortBy, price, cuisine }) => {
     return (
         <div id="maidaitems" className="food-container">
             <div className="food-text">
-                <h1>Maida Items</h1>
+                <h1>{category}</h1>
                 <p className="view-all" onClick={() => navigate("/all-maida-items")}>View all</p>
             </div>
             <Swiper

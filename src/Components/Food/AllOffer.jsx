@@ -2,7 +2,7 @@
 import React from "react";
 import "./AllOffer.css";
 
-import img1 from "../../assets/shyam.png";
+import img1 from "../../assets/Shyam.png";
 import img2 from "../../assets/Shyam1.png";
 import img3 from "../../assets/Shyam2.png";
 import img4 from "../../assets/Shyam3.png"
@@ -17,7 +17,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 const offers = [
-  { slug: "biryani", bannzer: img1 }, 
+  { slug: "biryani", banner: img1 }, 
   { slug: "shawarma", banner: img2 },
   { slug: "icecream", banner: img3 },
   { slug: "rolls", banner: img4 },

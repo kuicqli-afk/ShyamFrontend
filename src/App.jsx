@@ -1,8 +1,9 @@
-import React, { useState, } from 'react'
+import React, { useEffect, useState, } from 'react'
+import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar.jsx";
 import Slider from './Components/Slider/Slider'
-import Category from './Components/Category/Category'
+import Category from './Components/Category/Category' 
 import OrderPage from './Components/OrderPage/OrderPage.jsx'
 import Cake from './Components/Food/Cake';
 import Footer from './Components/Footer/Footer';
@@ -76,6 +77,16 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categories, setCategories] = useState([]);
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/categories/category-names")
+      .then((res) => {
+        console.log("Category Names:", res.data); 
+        setCategories(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <BrowserRouter>
       <ScrollToTop />
@@ -89,6 +100,7 @@ function App() {
             <>
               <DynamicSlider />
               <Category onSelectCategory={setSelectedCategory} />
+
               <Button
                 filter={filter}
                 setFilter={setFilter}
@@ -100,7 +112,7 @@ function App() {
                 setCuisine={setCuisine}
               />
               <AllOffer />
-              <KajuNamkeens
+              {/* <KajuNamkeens
                 categoryId={selectedCategory}
                 filter={filter}
                 sortBy={sortBy}
@@ -128,15 +140,26 @@ function App() {
                 sortBy={sortBy}
                 price={price}
                 cuisine={cuisine}
-              />
-              <MaidaItems
-                categoryId={selectedCategory}
-                filter={filter}
-                sortBy={sortBy}
-                price={price}
-                cuisine={cuisine}
-              />
-              <Special filter={filter}
+              /> */}
+              {
+                   categories.map((item)=>(
+                    <>
+                       
+                      <MaidaItems
+                      category={item}
+                        categoryId={selectedCategory}
+                        filter={filter}
+                        sortBy={sortBy}
+                        price={price}
+                        cuisine={cuisine}
+                      />
+                    </>
+                 
+                 ))
+              }
+             
+          
+              {/* <Special filter={filter}
                 sortBy={sortBy}
                 price={price}
                 cuisine={cuisine}
@@ -154,7 +177,7 @@ function App() {
                 cuisine={cuisine}
               />
               {/* <Special/> */}
-              <Cake filter={filter}
+              {/* <Cake filter={filter}
                 sortBy={sortBy}
                 price={price}
                 cuisine={cuisine}
@@ -163,14 +186,14 @@ function App() {
                 sortBy={sortBy}
                 price={price}
                 cuisine={cuisine}
-              />
+              /> */}
               <AdsSlider />
 
-              <Cookies filter={filter}
+              {/* <Cookies filter={filter}
                 sortBy={sortBy}
                 price={price}
                 cuisine={cuisine}
-              />
+              /> */}
 
               <Items filter={filter}
                 sortBy={sortBy}
@@ -183,7 +206,6 @@ function App() {
                 cuisine={cuisine}
               />
               <Combo
-                categoryId={selectedCategory}
                 filter={filter}
                 sortBy={sortBy}
                 price={price}
@@ -199,7 +221,7 @@ function App() {
                 sortBy={sortBy}
                 price={price}
                 cuisine={cuisine}
-              />
+              /> 
               <AppBanner />
               {/* <ScrollToTopButton /> */}
               <Footer />
