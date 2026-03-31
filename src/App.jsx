@@ -69,6 +69,7 @@ import DynamicSlider from './Components/Slider/DynamicSlider.jsx';
 import ComboOffers from './Components/ComboOffers/ComboOffers.jsx';
 import SubCategoryPage from './Components/Category/CategoryPage.jsx'
 import CategoryPage from './Components/Category/CategoryPage.jsx';
+import AllOffersProducts from './Components/Food/AllOffersProducts.jsx';
 
 function App() {
   const [filter, setFilter] = useState("all");
@@ -244,8 +245,8 @@ function App() {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/" element={<FeaturedListings />} />
 
-        
 
+        <Route path="/offers/:slug" element={<AllOffersProducts />} />
         {/* <Route path="/category/:categoryName" element={
           <>
           <Slider/>
@@ -289,8 +290,8 @@ function App() {
               <Footer />
             </>
           } />
-          <Route path="/offers/:slug" element={<OfferDetails />} />
-        
+        <Route path="/offers/:slug" element={<OfferDetails />} />
+
         <Route path="/all-knamkeenaju-" element={
           <>
             <Slider />
