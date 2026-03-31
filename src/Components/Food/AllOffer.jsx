@@ -1,38 +1,25 @@
-
-import React from "react";
-import "./AllOffer.css";
-
-import img1 from "../../assets/shyam.png";
-import img2 from "../../assets/Shyam1.png";
-import img3 from "../../assets/Shyam2.png";
-import img4 from "../../assets/Shyam3.png"
-import img5 from "../../assets/alloffer4.png";
-import img6 from "../../assets/Shyam4.png";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
-
-const offers = [
-  { slug: "biryani", banner: img1 }, 
-  { slug: "shawarma", banner: img2 },
-  { slug: "icecream", banner: img3 },
-  { slug: "rolls", banner: img4 },
-  { slug: "burger", banner: img5 },
-  { slug: "weekend-offer", banner: img6 },
-];
 
 const AllOffer = () => {
+  const [offers, setOffers] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/offers")
+      .then(res => setOffers(res.data.offers))
+      .catch(err => console.log(err));
+  }, []);
 
   return (
     <section className="offer-section">
       <Swiper
         modules={[Navigation, Autoplay]}
-        loop
+        loop={offers.length > 4}   // ✅ loop fix
         speed={700}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         navigation={{ nextEl: ".offer-next", prevEl: ".offer-prev" }}
@@ -52,19 +39,21 @@ const AllOffer = () => {
         className="offer-swiper"
       >
         {offers.map((offer) => (
-          <SwiperSlide key={offer.slug}>
+          <SwiperSlide key={offer._id}>
             <div
               className="offer-card"
-              onClick={() => {
-                window.scrollTo(0, 0);
-                navigate(`/offers/${offer.slug}`);
-              }}
+              onClick={() => navigate(`/offers/${offer.slug}`)}
             >
-              <img src={offer.banner} alt={offer.slug} />
+              <img
+                src={offer.image}
+                alt={offer.title}
+              />
+              <p>{offer.title}</p>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
+
       <button className="offer-prev">‹</button>
       <button className="offer-next">›</button>
     </section>

@@ -3,7 +3,7 @@ import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar.jsx";
 import Slider from './Components/Slider/Slider'
-import Category from './Components/Category/Category' 
+import Category from './Components/Category/Category'
 import OrderPage from './Components/OrderPage/OrderPage.jsx'
 import Cake from './Components/Food/Cake';
 import Footer from './Components/Footer/Footer';
@@ -67,6 +67,8 @@ import WeekendSpecial from './Components/ViewAll/WeekendSpecial.jsx';
 import DiscountOffer from './Components/DiscountOffer/DiscountOffer.jsx';
 import DynamicSlider from './Components/Slider/DynamicSlider.jsx';
 import ComboOffers from './Components/ComboOffers/ComboOffers.jsx';
+import SubCategoryPage from './Components/Category/CategoryPage.jsx'
+import CategoryPage from './Components/Category/CategoryPage.jsx';
 
 function App() {
   const [filter, setFilter] = useState("all");
@@ -79,12 +81,11 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/categories/category-names")
+      .get("http://localhost:5000/api/categories/visible-categories")
       .then((res) => {
-        console.log("Category Names:", res.data); 
-        setCategories(res.data);
-      })
-      .catch((err) => console.log(err));
+        const names = res.data.categories.map(cat => cat.name);
+        setCategories(names);
+      });
   }, []);
 
   return (
@@ -142,23 +143,20 @@ function App() {
                 cuisine={cuisine}
               /> */}
               {
-                   categories.map((item)=>(
-                    <>
-                       
-                      <MaidaItems
-                      category={item}
-                        categoryId={selectedCategory}
-                        filter={filter}
-                        sortBy={sortBy}
-                        price={price}
-                        cuisine={cuisine}
-                      />
-                    </>
-                 
-                 ))
+                categories.map((item) => (
+                  <MaidaItems
+                    key={item}
+                    category={item}
+                    categoryId={selectedCategory}
+                    filter={filter}
+                    sortBy={sortBy}
+                    price={price}
+                    cuisine={cuisine}
+                  />
+                ))
               }
-             
-          
+
+
               {/* <Special filter={filter}
                 sortBy={sortBy}
                 price={price}
@@ -221,7 +219,7 @@ function App() {
                 sortBy={sortBy}
                 price={price}
                 cuisine={cuisine}
-              /> 
+              />
               <AppBanner />
               {/* <ScrollToTopButton /> */}
               <Footer />
@@ -245,6 +243,18 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/" element={<FeaturedListings />} />
+
+        
+
+        {/* <Route path="/category/:categoryName" element={
+          <>
+          <Slider/>
+          <SubCategoryPage />
+          <Footer/>
+          </> 
+          } /> */}
+
+
         {/* <Route path="/discount" element={
           <>
             <Slider />
@@ -279,7 +289,8 @@ function App() {
               <Footer />
             </>
           } />
-        <Route path="/offers/:slug" element={<OfferDetails />} />
+          <Route path="/offers/:slug" element={<OfferDetails />} />
+        
         <Route path="/all-knamkeenaju-" element={
           <>
             <Slider />
@@ -328,7 +339,17 @@ function App() {
           }
         />
         <Route
-          path="/all-maida-items"
+          path="/category/:categoryName"
+          element={
+            <>
+              <CategoryPage />
+              <Footer />
+            </>
+          }
+        />
+
+        <Route
+          path="/category/:categoryName/:subCategoryName"
           element={
             <>
               <Slider />
@@ -428,6 +449,7 @@ function App() {
           }
         />
       </Routes>
+
 
     </BrowserRouter>
   )

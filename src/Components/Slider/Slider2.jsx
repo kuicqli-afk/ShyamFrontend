@@ -21,7 +21,7 @@ const Slider2 = () => {
 
         const latestFlat = flatBanners[0];
         const images = latestFlat.images.map(img => ({
-          src: `http://localhost:5000/uploads/${img}`,
+          src: {img},
           title: latestFlat.title,
         }));
         setSlides(images);

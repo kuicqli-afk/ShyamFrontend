@@ -45,16 +45,15 @@ const MaidaItems = ({ selectedCategory, filter, sortBy, price, cuisine, category
         axios
             .get(`http://localhost:5000/api/products/category-products/${category}`)
             .then((res) => {
-                console.log("Category Data:", res.data);
+                // console.log("Category Data:", res.data);
                 setList(res.data.products);
             })
             .catch((err) => console.log(err));
     }, [category]);
 
-
     const filteredList = useMemo(() => {
         let result = [...list];
-
+        // if (!filteredList.length) return null;
         // Veg / Non-Veg filter
         if (filter === "veg") {
             result = result.filter(item => item.type === "veg");
@@ -129,10 +128,18 @@ const MaidaItems = ({ selectedCategory, filter, sortBy, price, cuisine, category
     };
 
     return (
-        <div id="maidaitems" className="food-container">
+        <div
+            id={category.toLowerCase().replace(/\s+/g, "-")}
+            className="food-container"
+        >
             <div className="food-text">
                 <h1>{category}</h1>
-                <p className="view-all" onClick={() => navigate("/all-maida-items")}>View all</p>
+                <p
+                    className="view-all"
+                    onClick={() => navigate(`/category/${encodeURIComponent(category)}`)}
+                >
+                    View all
+                </p>
             </div>
             <Swiper
                 modules={[Autoplay]}
@@ -265,7 +272,7 @@ const MaidaItems = ({ selectedCategory, filter, sortBy, price, cuisine, category
                                 {/* 🖼 Image – when no video */}
                                 {!item.video && (
                                     <img
-                                        src={`http://localhost:5000/uploads/${item.image}`}
+                                        src={item.image}
                                         alt={item.title}
                                         className="food-image"
                                     />

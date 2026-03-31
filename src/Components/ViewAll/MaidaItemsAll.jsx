@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useCart } from "../../Context/CartContext";
 
 import Open from "../../assets/Open.png";
@@ -25,25 +25,26 @@ function MaidaItemsAll() {
     const [selectedSlots, setSelectedSlots] = useState({});
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+
+
+    const { categoryName, subCategoryName } = useParams();
+
     useEffect(() => {
-        const fetchAllItems = async () => {
-            try {
-                const res = await axios.get(
-                    "http://localhost:5000/api/products"
-                );
-
-                setItems(res.data.products || []);
-            } catch (err) {
-                console.log(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchAllItems();
-    }, []);
-
-    // const items = MaidaItemsList;
+        if (subCategoryName) {
+            axios
+                .get(`http://localhost:5000/api/products/subcategory-products/${subCategoryName}`)
+                .then((res) => setItems(res.data.products || []))
+                .catch((err) => console.log(err))
+                .finally(() => setLoading(false));
+        } else {
+            axios
+                .get(`http://localhost:5000/api/products/category-products/${categoryName}`)
+                .then((res) => setItems(res.data.products || []))
+                .catch((err) => console.log(err))
+                .finally(() => setLoading(false));
+        }
+    }, [categoryName, subCategoryName]);
+ 
     // const items = 
     const getQty = (item) => {
         const key = getCartKey(item);
@@ -63,7 +64,7 @@ function MaidaItemsAll() {
     return (
         <div className="food-container">
             <div id="mixnamkeen" className="food-text">
-                <h1>Maida Items</h1>
+                <h1>{categoryName}</h1>
             </div>
 
             {/* Grid for 5 cards per row */}

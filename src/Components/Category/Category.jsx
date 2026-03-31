@@ -30,25 +30,22 @@ const Category = ({ onSelectCategory }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/categories/category-list")
+      .get("https://shyambackend.onrender.com/api/categories/main-categories")
       .then((res) => {
         setCategories(res.data.categories);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  const handleCategoryClick = (id) => {
-    console.log("Clicked Category:", id); // ✅ DEBUG
+  const handleCategoryClick = (name) => {
+    const id = name.toLowerCase().replace(/\s+/g, "-");
 
-    onSelectCategory(id);
-
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
+
 
 
 
@@ -125,20 +122,20 @@ const Category = ({ onSelectCategory }) => {
             },
           }}
         >
-          {categories.map((item) => (
-            <SwiperSlide key={item._id}>
-              <div
-                className="explore-menu-list-item"
-                onClick={() => handleCategoryClick(item._id)}
-              >
-                <img
-                  src={`http://localhost:5000/uploads/${item.image}`}
-                  alt={item.name}
-                />
-                <p>{item.name}</p>
-              </div>
-            </SwiperSlide>
-          ))}
+          {categories
+            .filter(item => !item.hidden)
+            .map((item) => (
+              <SwiperSlide key={item._id}>
+                <div
+                  className="explore-menu-list-item"
+                  onClick={() => handleCategoryClick(item.name)}
+                >
+                  <img src={item.image} alt={item.name} loading="lazy" />
+
+                  <p>{item.name}</p>
+                </div>
+              </SwiperSlide>
+            ))}
 
         </Swiper>
         <div className="category-dots"></div>

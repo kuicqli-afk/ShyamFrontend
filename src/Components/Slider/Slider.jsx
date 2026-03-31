@@ -15,7 +15,7 @@ const Slider = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const res = await axios.get("https://shyambackend.onrender.com/api/banner");
+        const res = await axios.get("http://localhost:5000/api/banner");
         const clickableBanners = res.data.banners
           .filter(b => ["offer", "combo", "weekend", "flat"].includes(b.type))
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -24,7 +24,7 @@ const Slider = () => {
 
         const latestBanner = clickableBanners[0];
         const images = latestBanner.images.map(img => ({
-          src: `http://localhost:5000/uploads/${img}`,
+          src: img, // ✅ direct Cloudinary URL
           off: latestBanner.off,
           title: latestBanner.title,
           type: latestBanner.type,
@@ -74,28 +74,28 @@ const Slider = () => {
     return () => track.removeEventListener("transitionend", handleTransitionEnd);
   }, [index, slides]);
 
-//   const handleClick = (item) => {
+  //   const handleClick = (item) => {
 
-//   // ❌ flat → do nothing
-//   if (item.type === "flat") {
-//     return;
-//   }
+  //   // ❌ flat → do nothing
+  //   if (item.type === "flat") {
+  //     return;
+  //   }
 
-//   // ✅ offer
-//   if (item.type === "offer") {
-//     navigate(`/discount?type=offer&discount=${item.off}`);
-//   }
+  //   // ✅ offer
+  //   if (item.type === "offer") {
+  //     navigate(`/discount?type=offer&discount=${item.off}`);
+  //   }
 
-//   // ✅ combo
-//   else if (item.type === "combo") {
-//     navigate(`/discount?type=combo`);
-//   }
+  //   // ✅ combo
+  //   else if (item.type === "combo") {
+  //     navigate(`/discount?type=combo`);
+  //   }
 
-//   // ✅ weekend
-//   else if (item.type === "weekend") {
-//     navigate(`/discount?type=weekend`);
-//   }
-// };
+  //   // ✅ weekend
+  //   else if (item.type === "weekend") {
+  //     navigate(`/discount?type=weekend`);
+  //   }
+  // };
   if (slides.length === 0)
     return <div className="slider-container">Loading banners...</div>;
 
