@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "./Slider.css";
-import offerImg from "../../assets/offer.png";
 import { useNavigate } from "react-router-dom";
 
 const Slider = () => {
@@ -24,7 +23,7 @@ const Slider = () => {
 
         const latestBanner = clickableBanners[0];
         const images = latestBanner.images.map(img => ({
-          src: img, // ✅ direct Cloudinary URL
+          src: img,
           off: latestBanner.off,
           title: latestBanner.title,
           type: latestBanner.type,
@@ -109,7 +108,6 @@ const Slider = () => {
             onClick={() => handleClick(slide)}
           >
             <img src={slide.src} className="bg-img" alt={slide.title} />
-            <img src={offerImg} className="offer-img" alt="offer" />
           </div>
         ))}
       </div>

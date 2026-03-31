@@ -4,7 +4,7 @@ import "./Slider.css";
 import slide1 from "../../assets/banner1.png";
 import slide2 from "../../assets/banner1.png";
 import slide3 from "../../assets/banner1.png";
-import offer from "../../assets/offer.png";
+// import offer from "../../assets/offer.png";
 
 const slides = [slide1, slide2, slide3];
 const loopSlides = [...slides, ...slides]; 

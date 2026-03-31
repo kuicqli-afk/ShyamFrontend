@@ -8,8 +8,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import slide1 from "../../assets/bnanner (1).png";
 import slide2 from "../../assets/bnanner (1).png";
 import slide3 from "../../assets/bnanner (1).png";
-import offer from "../../assets/offer.png";
-import fssai from "../../assets/fssai.png"
+// import offer from "../../assets/offer.png";
+// import fssai from "../../assets/fssai.png"
 // Components
 
 // import { useNavigate } from "react-router-dom";
@@ -41,7 +41,7 @@ const ShyamBakery = () => {
       try {
 
         const res = await axios.get(
-          "http://localhost:4000/api/product/get-products"
+          "https://shyambackend.onrender.com/api/product/get-products"
         );
 
         setItems(res.data.data);

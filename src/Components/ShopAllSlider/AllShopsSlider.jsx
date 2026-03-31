@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import { FaStar } from "react-icons/fa";
-import offer from "../../assets/offer.png";
+// import offer from "../../assets/offer.png";
 import fssai from "../../assets/fssai.png";
 
 function AllShopsSlider() {

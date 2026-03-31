@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "./Slider.css";
-import offerIcon from "../../assets/offer.png"; // offer overlay icon
+// import offerIcon from "../../assets/offer.png"; // offer overlay icon
 import { useNavigate } from "react-router-dom";
 
 const DynamicSlider = () => {
@@ -17,7 +17,7 @@ const DynamicSlider = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/banner");
+        const res = await axios.get("https://shyambackend.onrender.com/api/banner");
         const banners = res.data.banners;
         if (!banners || banners.length === 0) return;
 
@@ -30,7 +30,7 @@ const DynamicSlider = () => {
 
         // Prepare slides
         const slidesData = latest.images.map(img => ({
-          src: `http://localhost:5000/uploads/${img}`,
+          src: img,
           title: latest.title,
           off: latest.off,
           type: latest.type
@@ -129,7 +129,7 @@ const DynamicSlider = () => {
         {loopSlides.map((slide, i) => (
           <div key={i} className="slide" onClick={() => handleClick(slide)}>
             <img src={slide.src} className="bg-img" alt={slide.title} />
-            {slide.type === "offer" && <img src={offerIcon} className="offer-img" alt="offer" />}
+            {/* {slide.type === "offer" && <img src={offerIcon} className="offer-img" alt="offer" />} */}
           </div>
         ))}
       </div>
