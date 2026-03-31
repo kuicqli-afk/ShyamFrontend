@@ -43,7 +43,7 @@ const MaidaItems = ({ selectedCategory, filter, sortBy, price, cuisine, category
         if (!category) return;
 
         axios
-            .get(`http://localhost:5000/api/products/category-products/${category}`)
+            .get(`https://shyambackend.onrender.com/api/products/category-products/${category}`)
             .then((res) => {
                 // console.log("Category Data:", res.data);
                 setList(res.data.products);

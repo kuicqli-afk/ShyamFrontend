@@ -81,7 +81,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/categories/visible-categories")
+      .get("https://shyambackend.onrender.com/api/categories/visible-categories")
       .then((res) => {
         const names = res.data.categories.map(cat => cat.name);
         setCategories(names);

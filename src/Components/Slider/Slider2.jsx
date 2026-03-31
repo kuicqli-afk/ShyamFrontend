@@ -12,7 +12,7 @@ const Slider2 = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/banner");
+        const res = await axios.get("https://shyambackend.onrender.com/api/banner");
         const flatBanners = res.data.banners
           .filter(b => b.type === "flat")
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

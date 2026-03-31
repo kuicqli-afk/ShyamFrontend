@@ -10,7 +10,7 @@ const AllOffer = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/offers")
+    axios.get("https://shyambackend.onrender.com/api/offers")
       .then(res => setOffers(res.data.offers))
       .catch(err => console.log(err));
   }, []);

@@ -15,7 +15,7 @@ const Slider = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/banner");
+        const res = await axios.get("https://shyambackend.onrender.com/api/banner");
         const clickableBanners = res.data.banners
           .filter(b => ["offer", "combo", "weekend", "flat"].includes(b.type))
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
