@@ -17,7 +17,7 @@ const SubCategorySlider = () => {
 
   useEffect(() => {
     axios
-      .get(`https://shyamfrontend2.onrender.com/api/categories/subcategories/${categoryName}`)
+      .get(`https://shyambackend.onrender.com/api/categories/subcategories/${categoryName}`)
       .then((res) => setSubs(res.data.subcategories))
       .catch((err) => console.log(err));
   }, [categoryName]);
