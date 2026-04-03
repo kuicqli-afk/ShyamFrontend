@@ -143,7 +143,7 @@ function App() {
                 price={price}
                 cuisine={cuisine}
               /> */}
-              {
+              {/* {
                 categories.map((item) => (
                   <MaidaItems
                     key={item}
@@ -154,8 +154,34 @@ function App() {
                     price={price}
                     cuisine={cuisine}
                   />
+                  
+                ))
+              } */}
+
+
+
+              {
+                categories.map((item) => (
+                  <div key={item}>
+
+                    {/* CATEGORY PRODUCTS */}
+                    <MaidaItems
+                      category={item}
+                      categoryId={selectedCategory}
+                      filter={filter}
+                      sortBy={sortBy}
+                      price={price}
+                      cuisine={cuisine}
+                    />
+
+                    {/* 🔥 ADS AFTER EACH CATEGORY */}
+                    <AdsSlider category={item} />
+
+                  </div>
                 ))
               }
+
+
 
 
               {/* <Special filter={filter}
@@ -186,7 +212,7 @@ function App() {
                 price={price}
                 cuisine={cuisine}
               /> */}
-              <AdsSlider />
+              {/* <AdsSlider /> */}
 
               {/* <Cookies filter={filter}
                 sortBy={sortBy}
@@ -210,7 +236,7 @@ function App() {
                 price={price}
                 cuisine={cuisine}
               />
-              <AdsSlider />
+              {/* <AdsSlider /> */}
               <Weekend filter={filter}
                 sortBy={sortBy}
                 price={price}

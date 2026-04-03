@@ -1,21 +1,38 @@
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import "./Slider.css";
 
-import slide1 from "../../assets/banner1.png";
-import slide2 from "../../assets/banner1.png";
-import slide3 from "../../assets/banner1.png";
-// import offer from "../../assets/offer.png";
+const Slider1 = ({ category }) => {
 
-const slides = [slide1, slide2, slide3];
-const loopSlides = [...slides, ...slides]; 
-
-const Slider1 = () => {
+  const [slides, setSlides] = useState([]);
   const [index, setIndex] = useState(0);
   const trackRef = useRef(null);
   const isTransitioning = useRef(false);
 
-  // autoplay
+  // ✅ FETCH ADS FROM API
   useEffect(() => {
+    const fetchAds = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:5000/api/ads?category=${category}`
+        );
+
+        setSlides(res.data.ads || []);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchAds();
+  }, [category]);
+
+  // ✅ duplicate for infinite loop
+  const loopSlides = [...slides, ...slides];
+
+  // ✅ autoplay
+  useEffect(() => {
+    if (slides.length === 0) return;
+
     const timer = setInterval(() => {
       if (!isTransitioning.current) {
         isTransitioning.current = true;
@@ -24,10 +41,12 @@ const Slider1 = () => {
     }, 3000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [slides]);
 
-  // smooth infinite loop (NO RESTART FEEL)
+  // ✅ smooth infinite loop
   useEffect(() => {
+    if (slides.length === 0) return;
+
     const track = trackRef.current;
     if (!track) return;
 
@@ -44,21 +63,35 @@ const Slider1 = () => {
     };
 
     track.addEventListener("transitionend", handleTransitionEnd);
+
     return () =>
       track.removeEventListener("transitionend", handleTransitionEnd);
-  }, [index]);
+
+  }, [index, slides]);
+
+  // ❌ no ads case
+  if (slides.length === 0) return null;
 
   return (
     <div className="slider1-container">
+
       <div className="slider-track" ref={trackRef}>
-        {loopSlides.map((img, i) => (
+        {loopSlides.map((item, i) => (
           <div className="slide" key={i}>
-            <img src={img} className="bg-img" alt="slide" />
-            {/* <img src={offer} className="offer-img" alt="offer" /> */}
+
+            <a href={item.link || "#"}>
+              <img
+                src={item.image}
+                className="bg-img"
+                alt="slide"
+              />
+            </a>
+
           </div>
         ))}
       </div>
 
+      {/* DOTS */}
       <div className="slider-dots">
         {slides.map((_, i) => (
           <span
@@ -68,6 +101,7 @@ const Slider1 = () => {
           />
         ))}
       </div>
+
     </div>
   );
 };

@@ -16,8 +16,6 @@ import { FaRegHeart } from "react-icons/fa";
 import { LiaStopwatchSolid } from "react-icons/lia";
 import { VscEye } from "react-icons/vsc";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 import { useCart } from "../../Context/CartContext";
