@@ -5,9 +5,9 @@ import Navbar from "./Components/Navbar/Navbar.jsx";
 import Slider from './Components/Slider/Slider'
 import Category from './Components/Category/Category'
 import OrderPage from './Components/OrderPage/OrderPage.jsx'
-import Cake from './Components/Food/Cake';
+
 import Footer from './Components/Footer/Footer';
-import Cookies from './Components/Food/Cookies';
+
 import RestaurantPage from './Components/ShopsDetailPage/RestaurantPage.jsx';
 import Items from "./Components/Food/Items.jsx";
 import AppBanner from './Components/Food/AppBanner.jsx';
@@ -30,26 +30,22 @@ import Combo from './Components/Food/Combo.jsx';
 import Weekend from './Components/Food/Weekend.jsx';
 import { ScrollToTopButton } from './Components/ScrollToTopButton/ScrollToTopButton.jsx';
 import ScrollToTop from "./Components/ScrollToTopButton/ScrollToTop";
-import Pastry from './Components/Food/Pastry.jsx';
-import Sev from './Components/Food/ShyamSev.jsx';
+
 import AllOffer from './Components/Food/AllOffer.jsx'
-import Special from './Components/Food/Special.jsx';
+
 import AdsSlider from './Components/Slider/AdsSlider.jsx';
 import OfferDetails from './Components/Pages/OfferDetails.jsx';
-import Namkeen from './Components/Food/Namkeen.jsx';
+
 import ShyamBakery from './Components/ShopsDetailPage/ShyamBakery.jsx';
 import ShaymChips from './Components/ShopsDetailPage/ShaymChips.jsx';
 import AllShopsSlider from './Components/ShopAllSlider/AllShopsSlider.jsx';
 import ShyamSev from './Components/ShopsDetailPage/ShyamSev.jsx';
 import ShaymBhujiya from './Components/ShopsDetailPage/ShaymBhujiya.jsx';
-import KajuNamkeens from "./Components/Food/KajuNamkeens.jsx";
+
 import KajuNamkeen from "./Components/ViewAll/KajuNamkeen.jsx";
 import SingleItemAll from './Components/ViewAll/SingleItems.jsx';
 import SingleItems from './Components/ShopsDetailPage/SingleItems.jsx';
-import MixNakmeen from './Components/Food/MixNakmeen.jsx';
-import SingleItem from './Components/Food/SingleItem.jsx';
-import Chura from './Components/Food/Chura.jsx';
-import Chips from './Components/Food/Chips.jsx';
+
 import MaidaItems from './Components/Food/MaidaItems.jsx';
 import MixAll from './Components/ViewAll/MixAll.jsx';
 import ChuraAll from "./Components/ViewAll/Chura.jsx"
@@ -66,10 +62,10 @@ import CombosAll from './Components/ViewAll/CombosAll.jsx';
 import WeekendSpecial from './Components/ViewAll/WeekendSpecial.jsx';
 import DiscountOffer from './Components/DiscountOffer/DiscountOffer.jsx';
 import DynamicSlider from './Components/Slider/DynamicSlider.jsx';
-import ComboOffers from './Components/ComboOffers/ComboOffers.jsx';
-import SubCategoryPage from './Components/Category/CategoryPage.jsx'
+
 import CategoryPage from './Components/Category/CategoryPage.jsx';
 import AllOffersProducts from './Components/Food/AllOffersProducts.jsx';
+import CategoryMenu from './Components/Category/CategoryMenu.jsx';
 
 function App() {
   const [filter, setFilter] = useState("all");
@@ -100,9 +96,10 @@ function App() {
           path="/"
           element={
             <>
+
               <DynamicSlider />
               <Category onSelectCategory={setSelectedCategory} />
-
+              <CategoryMenu />
               <Button
                 filter={filter}
                 setFilter={setFilter}
@@ -114,51 +111,6 @@ function App() {
                 setCuisine={setCuisine}
               />
               <AllOffer />
-              {/* <KajuNamkeens
-                categoryId={selectedCategory}
-                filter={filter}
-                sortBy={sortBy}
-                price={price}
-                cuisine={cuisine}
-              />
-              <MixNakmeen
-                categoryId={selectedCategory}
-                filter={filter}
-                sortBy={sortBy}
-                price={price}
-                cuisine={cuisine}
-              />
-              <SingleItem filter={filter}
-                sortBy={sortBy}
-                price={price}
-                cuisine={cuisine}
-              />
-              <Chura filter={filter}
-                sortBy={sortBy}
-                price={price}
-                cuisine={cuisine}
-              />
-              <Chips filter={filter}
-                sortBy={sortBy}
-                price={price}
-                cuisine={cuisine}
-              /> */}
-              {/* {
-                categories.map((item) => (
-                  <MaidaItems
-                    key={item}
-                    category={item}
-                    categoryId={selectedCategory}
-                    filter={filter}
-                    sortBy={sortBy}
-                    price={price}
-                    cuisine={cuisine}
-                  />
-                  
-                ))
-              } */}
-
-
 
               {
                 categories.map((item) => (
@@ -180,45 +132,6 @@ function App() {
                   </div>
                 ))
               }
-
-
-
-
-              {/* <Special filter={filter}
-                sortBy={sortBy}
-                price={price}
-                cuisine={cuisine}
-              />
-              <Namkeen
-                categoryId={selectedCategory}
-                filter={filter}
-                sortBy={sortBy}
-                price={price}
-                cuisine={cuisine}
-              />
-              <Pastry filter={filter}
-                sortBy={sortBy}
-                price={price}
-                cuisine={cuisine}
-              />
-              {/* <Special/> */}
-              {/* <Cake filter={filter}
-                sortBy={sortBy}
-                price={price}
-                cuisine={cuisine}
-              />
-              <Sev filter={filter}
-                sortBy={sortBy}
-                price={price}
-                cuisine={cuisine}
-              /> */}
-              {/* <AdsSlider /> */}
-
-              {/* <Cookies filter={filter}
-                sortBy={sortBy}
-                price={price}
-                cuisine={cuisine}
-              /> */}
 
               <Items filter={filter}
                 sortBy={sortBy}
@@ -273,29 +186,7 @@ function App() {
 
 
         <Route path="/offers/:slug" element={<AllOffersProducts />} />
-        {/* <Route path="/category/:categoryName" element={
-          <>
-          <Slider/>
-          <SubCategoryPage />
-          <Footer/>
-          </> 
-          } /> */}
 
-
-        {/* <Route path="/discount" element={
-          <>
-            <Slider />
-            <DiscountOffer />
-            <Footer/>
-          </>
-        } />
-        <Route path="/combo" element={
-          <>
-            <Slider />
-            <ComboOffers />
-            <Footer/>
-          </>
-        } /> */}
         <Route path="/discount" element={
           <>
             <Slider />

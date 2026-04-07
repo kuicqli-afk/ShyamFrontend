@@ -48,7 +48,6 @@ const AllOffer = () => {
                 src={offer.image}
                 alt={offer.title}
               />
-              <p>{offer.title}</p>
             </div>
           </SwiperSlide>
         ))}
