@@ -99,7 +99,7 @@ function App() {
 
               <DynamicSlider />
               <Category onSelectCategory={setSelectedCategory} />
-              <CategoryMenu />
+              {/* <CategoryMenu /> */}
               <Button
                 filter={filter}
                 setFilter={setFilter}

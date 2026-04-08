@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import "./Category.css";
-
+import { useNavigate } from "react-router-dom";
+import all from "../../assets/userDP.png"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -10,23 +11,14 @@ import "swiper/css/pagination";
 // import { FaOptinMonster } from "react-icons/fa";
 // import Icecream from "../../assets/icecream.png";
 // import Namkeen from "../../assets/namkeen.png";
-const categories = [
-  { name: "Sev", id: "sev" },
-  { name: "Kaju Namkeen", id: "kajunamkeen" },
-  { name: "Bhujiya", id: "bhujiya" },
-  { name: "Mix Namkeen", id: "mixnamkeen" },
-  { name: "Single Items", id: "singleitem" },
-  { name: "Chura", id: "chura" },
-  { name: "Chips", id: "chips" },
-  { name: "Maida Items", id: "maidaitems" },
-  { name: "Cake", id: "cake" },
-  { name: "Cookies", id: "cookies" },
-];
+
+
 
 const Category = ({ onSelectCategory }) => {
   // const prevRef = useRef(null);
   // const nextRef = useRef(null);
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -37,20 +29,17 @@ const Category = ({ onSelectCategory }) => {
       .catch((err) => console.log(err));
   }, []);
 
-  const handleCategoryClick = (name) => {
-    const id = name.toLowerCase().replace(/\s+/g, "-");
-
-    document.getElementById(id)?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+  const handleCategoryClick = (item) => {
+    navigate(`/category/${item.code}?type=main`);
   };
 
 
 
 
   return (
+
     <div className="explore-menu">
+
       <div className="explore-menu-wrapper">
         <Swiper
           modules={[FreeMode, Autoplay, Pagination]}
@@ -123,13 +112,14 @@ const Category = ({ onSelectCategory }) => {
           }}
         >
           {categories
-            .filter(item => !item.hidden)
+            .filter(item => item.hidden !== true)
             .map((item) => (
               <SwiperSlide key={item._id}>
                 <div
                   className="explore-menu-list-item"
-                  onClick={() => handleCategoryClick(item.name)}
+                  onClick={() => handleCategoryClick(item)}
                 >
+
                   <img src={item.image} alt={item.name} loading="lazy" />
 
                   <p>{item.name}</p>

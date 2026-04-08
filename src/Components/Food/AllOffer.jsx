@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
-
+import "./AllOffer.css"
 const AllOffer = () => {
   const [offers, setOffers] = useState([]);
   const navigate = useNavigate();

@@ -16,8 +16,14 @@ const SubCategorySlider = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const formattedName = categoryName
+      .replace(/-/g, " ")         // mix-namkeen → mix namkeen
+      .replace(/\b\w/g, c => c.toUpperCase()); // mix namkeen → Mix Namkeen
+
     axios
-      .get(`https://shyambackend.onrender.com/api/categories/subcategories/${categoryName}`)
+      .get(
+        `https://shyambackend.onrender.com/api/categories/subcategories/${formattedName}`
+      )
       .then((res) => setSubs(res.data.subcategories))
       .catch((err) => console.log(err));
   }, [categoryName]);
